@@ -52,6 +52,9 @@ def main():
     parser_ogt.add_argument('-p','--threads',default=1,help='number of threads \
     used for feature extraction, default is 1. if set to 0, it will use all cpus available',
     metavar='')
+    
+    parser_ogt.add_argument('-s','--suffix',help='indir suffix',
+    type=str,default='fasta')
 
 
     ############################## Topt arguments  #############################
