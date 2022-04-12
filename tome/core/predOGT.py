@@ -20,7 +20,8 @@ import sys
 import os
 import pandas as pd
 from Bio import SeqIO
-from sklearn.externals import joblib
+# from sklearn.externals import joblib
+import joblib
 from collections import Counter
 from multiprocessing import Pool, cpu_count
 import numpy as np
@@ -182,6 +183,7 @@ def predict(fasta_file,model,means,stds,features,p):
 def main(args):
     infile = args.fasta
     indir = args.indir
+    suffix = args.suffix
 
     outf = args.out
 
@@ -195,7 +197,7 @@ def main(args):
     elif indir is not None:
         for name in os.listdir(indir):
             if name.startswith('.'): continue
-            if not name.endswith('.fasta'): continue
+            if not name.endswith(f'.{suffix}'): continue
             pred_ogt = predict(os.path.join(indir,name),model,means,stds,features,args.threads)
             outf.write('{0}\t{1}\n'.format(name, pred_ogt))
     else: sys.exit('Please provide at least a fasta file or a directory that contains \
